@@ -97,7 +97,7 @@ public class ANDROIDMentaAppStepDefinition
 		    
 		    String rep = vDeviceID.replaceAll("-", " ");    
 		    
-			Assert.assertEquals(Constants.KEYWORD_PASS,Constants.key.launchAppOnBrowserStack(rep , vVersion));
+			Assert.assertEquals(Constants.KEYWORD_PASS,Constants.key.launchAppANDROIDBrowserstack(rep , vVersion));
 			LogCapture.info("Application installed and launched successfully......!!!!");
 		}    
 	}

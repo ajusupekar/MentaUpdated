@@ -103,7 +103,7 @@ public class Reusables {
 
 	}
 	
-	public String launchAppOnBrowserStack(String bDevice , String bVersion) throws Exception 
+	public String launchAppANDROIDBrowserstack(String bDevice , String bVersion) throws Exception 
 	{
 		String username = Constants.CONFIG.getProperty("BS_Username");
 		String accesskey = Constants.CONFIG.getProperty("BS_AccessToken");
@@ -141,7 +141,7 @@ public class Reusables {
 			Constants.AndroidDC.setCapability("noReset", true);
 
 			// Browserstack app path
-			LogCapture.info("Installing Menta Application............");
+			LogCapture.info("Installing Android Menta Application............");
 			
 			Constants.AndroidDC.setCapability(MobileCapabilityType.APP,"bs://" + Constants.CONFIG.getProperty("BS_AndroidMentaAppVersion"));
 			
@@ -162,6 +162,63 @@ public class Reusables {
 	return Constants.KEYWORD_PASS;
 }
 
+	public String launchAppIOSBrowserstack(String bDevice , String bVersion) throws Exception 
+	{
+		String username = Constants.CONFIG.getProperty("BS_Username");
+		String accesskey = Constants.CONFIG.getProperty("BS_AccessToken");
+		try 
+		{
+			// Writing logs in log file
+			LogCapture.info("Application setup started on browser stack............");   
+			SimpleDateFormat formatDateTime = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+			String DateTime = formatDateTime.format(new Date());
+			SimpleDateFormat formatDayMonth = new SimpleDateFormat("dd MMMM");
+			String DayMonth = formatDayMonth.format(new Date());
+			SimpleDateFormat formatTimeStamp = new SimpleDateFormat("hh:mm:ss");
+			String TimeStamp = formatTimeStamp.format(new Date());
+			// Checking platform for setting up desired capabilities
+			if (Constants.CONFIG.getProperty("platformName").equalsIgnoreCase("iOS")) {
+
+				// Reading properties file and setting up desired capabilities for iOS platform
+
+                String iOSDeviceName = Constants.CONFIG.getProperty("BS_iOSDevice");
+                String iOSDeviceVersion = Constants.CONFIG.getProperty("BS_iOSPlatformVersion");
+    			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformName")+" Device "+bDevice+" Version "+bVersion+" ............");
+                Constants.IOSDC = new DesiredCapabilities();
+                Constants.IOSDC.setCapability("device", iOSDeviceName);
+                Constants.IOSDC.setCapability("os_version", iOSDeviceVersion);
+                Constants.IOSDC.setCapability("project", "CD iOS");
+                //Constants.IOSDC.setCapability("build", "iOS - "+day);
+                //Constants.IOSDC.setCapability("name", date + " - "+ Constants.TagNames);
+                // Constants.IOSDC.setCapability("browserstack.debug", "true");
+                Constants.IOSDC.setCapability("build", "iOS _"+DayMonth);
+                //Constants.androidDc.setCapability("name", TimeStamp + " - "+ Constants.TagNames);
+                // Constants.IOSDC.setCapability("build", DateTime);
+                Constants.IOSDC.setCapability("name", "CD iOS");
+               
+                LogCapture.info("Installing iOS Menta Application............");
+                Constants.IOSDC.setCapability(MobileCapabilityType.APP,"bs://" + Constants.CONFIG.getProperty("BS_IOSMentaAppVersion"));
+
+               
+                Constants.driver = new IOSDriver<MobileElement>(
+                        new URL("https://" + username + ":" + accesskey + "@hub-cloud.browserstack.com/wd/hub"),
+                        Constants.IOSDC);
+                // Webdriver wait implementation
+                Constants.waitInSeconds = Integer.parseInt(Constants.CONFIG.getProperty("WaitInSecondsForIOS"));
+                Constants.wait = new WebDriverWait(Constants.driver, Constants.waitInSeconds);
+                takeSnapShot();
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            LogCapture.info(
+                    "Installation or launching app process failed...Please check provided configuration details.........!!!!");
+            return Constants.KEYWORD_FAIL;
+        }
+        return Constants.KEYWORD_PASS;
+
+    }
+	
 	public String launchAppUsingDeviceId(String device) throws Exception {
 		try {
 		// Writing logs in log file

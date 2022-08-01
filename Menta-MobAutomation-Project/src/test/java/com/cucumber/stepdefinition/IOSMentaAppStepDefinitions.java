@@ -18,9 +18,49 @@ public class IOSMentaAppStepDefinitions
 	@Given("^ios menta app is installed on the device and launched successfully$")
 	public void ios_menta_app_is_installed_on_the_device_and_launched_successfully() throws Throwable 
 	{
-		String vObjAppVersion = "5";
-	    Assert.assertEquals("PASS", Constants.key.launchApp(vObjAppVersion));
-	    LogCapture.info("IOS Menta Application installed and launched successfully...");
+		if(Constants.CONFIG.getProperty("isJenkins").equals("true"))
+		{
+			String vObjAppVersion = "5";
+			Assert.assertEquals("PASS", Constants.key.launchApp(vObjAppVersion));
+			LogCapture.info("IOS Menta Application installed and launched successfully...");
+		}
+		else if(Constants.CONFIG.getProperty("isBrowserstack").equals("true"))
+		{
+			Thread.sleep(10000);
+			
+			 String vDeviceID = Constants.CONFIG.getProperty("bDevice");
+		        LogCapture.info("Menta Application is launching on  device "+vDeviceID+"....");
+		        //System.out.println(vBrowserName);
+		        
+		        try {
+		            if (!Constants.JenkinsBrowser.isEmpty() || !Constants.JenkinsBrowser.equals("")) {
+		            	vDeviceID = Constants.JenkinsBrowser;
+		                LogCapture.info("Device ID is :" + vDeviceID);
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+			
+		        
+		        String vVersion = Constants.CONFIG.getProperty("bVersion");
+		        LogCapture.info("Menta Application is launching on  device version "+vVersion+"....");
+		        //System.out.println(vBrowserName);
+		        try {
+		            if (!Constants.BrowserStack.isEmpty() || !Constants.BrowserStack.equals("")) {
+		            	vVersion = Constants.BrowserStack;
+		                LogCapture.info("Device Version is :" + vVersion);
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        } 
+			
+		    
+		    String rep = vDeviceID.replaceAll("-", " ");    
+		    
+			Assert.assertEquals(Constants.KEYWORD_PASS,Constants.key.launchAppIOSBrowserstack(rep , vVersion));
+			LogCapture.info("Application installed and launched successfully......!!!!");
+			
+		}
 	}
 
 	@When("^ios user clink on the Sign in button$")
