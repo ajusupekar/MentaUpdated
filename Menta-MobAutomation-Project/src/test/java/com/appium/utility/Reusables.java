@@ -138,7 +138,7 @@ public class Reusables {
 			//Constants.androidDc.setCapability("name", TimeStamp + " - "+ Constants.TagNames);
 			Constants.AndroidDC.setCapability("build", DateTime);
 			Constants.AndroidDC.setCapability("name", "Menta Android");
-			Constants.AndroidDC.setCapability("platformName", Constants.CONFIG.getProperty("platformName"));
+			//Constants.AndroidDC.setCapability("platformName", Constants.CONFIG.getProperty("platformName"));
 			Constants.AndroidDC.setCapability("unicodeKeyboard", true);
 			Constants.AndroidDC.setCapability("noReset", true);
 
@@ -186,29 +186,29 @@ public class Reusables {
 			// AndroidDeviceVersion = Constants.CONFIG.getProperty("BS_AndroidPlatformVersion");
 
 			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformName")+" Device "+bDevice+" Version "+bVersion+" ............");
-			Constants.AndroidDC = new DesiredCapabilities();
-			Constants.AndroidDC.setCapability("device", bDevice);							 
-			Constants.AndroidDC.setCapability("os_version",bVersion);
-			Constants.AndroidDC.setCapability("project", "Menta IOS");
+			Constants.IOSDC = new DesiredCapabilities();
+			Constants.IOSDC.setCapability("device", bDevice);							 
+			Constants.IOSDC.setCapability("os_version",bVersion);
+			Constants.IOSDC.setCapability("project", "Menta IOS");
 			//Constants.androidDc.setCapability("build", "Android - "+day);
 			//Constants.androidDc.setCapability("name", date + " - "+ Constants.TagNames);
 			// Constants.IOSDC.setCapability("browserstack.debug", "true");
 			//Constants.androidDc.setCapability("build", "Android - "+DayMonth);
 			//Constants.androidDc.setCapability("name", TimeStamp + " - "+ Constants.TagNames);
-			Constants.AndroidDC.setCapability("build", DateTime);
-			Constants.AndroidDC.setCapability("name", "Menta Android");
+			Constants.IOSDC.setCapability("build", DateTime);
+			Constants.IOSDC.setCapability("name", "Menta Android");
 			//Constants.AndroidDC.setCapability("platformName", Constants.CONFIG.getProperty("platformName"));
-			Constants.AndroidDC.setCapability("unicodeKeyboard", true);
-			Constants.AndroidDC.setCapability("noReset", true);
+			Constants.IOSDC.setCapability("unicodeKeyboard", true);
+			Constants.IOSDC.setCapability("noReset", true);
 
 			// Browserstack app path
 			LogCapture.info("Installing IOS Menta Application............");
 			
-			Constants.AndroidDC.setCapability(MobileCapabilityType.APP,"bs://" + Constants.CONFIG.getProperty("BS_IOSMentaAppVersion"));
+			Constants.IOSDC.setCapability(MobileCapabilityType.APP,"bs://" + Constants.CONFIG.getProperty("BS_IOSMentaAppVersion"));
 			
-			Constants.driver = new AndroidDriver<MobileElement>(
+			Constants.driver = new IOSDriver<MobileElement>(
 					new URL("https://" + username + ":" + accesskey + "@hub-cloud.browserstack.com/wd/hub"),
-					Constants.AndroidDC);
+					Constants.IOSDC);
 			// Webdriver wait implementation
 			Constants.waitInSeconds = Integer.parseInt(Constants.CONFIG.getProperty("waitInSeconds"));
 			Constants.wait = new WebDriverWait(Constants.driver, Constants.waitInSeconds);
