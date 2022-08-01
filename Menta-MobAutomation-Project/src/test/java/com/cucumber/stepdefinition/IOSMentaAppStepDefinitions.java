@@ -28,7 +28,7 @@ public class IOSMentaAppStepDefinitions
 		{
 			Thread.sleep(10000);
 			
-			 String vDeviceID = Constants.CONFIG.getProperty("bDevice");
+			 String vDeviceID = Constants.CONFIG.getProperty("bIOSDevice");
 		        LogCapture.info("Menta Application is launching on  device "+vDeviceID+"....");
 		        //System.out.println(vBrowserName);
 		        
@@ -42,7 +42,7 @@ public class IOSMentaAppStepDefinitions
 		        }
 			
 		        
-		        String vVersion = Constants.CONFIG.getProperty("bVersion");
+		        String vVersion = Constants.CONFIG.getProperty("bIOSVersion");
 		        LogCapture.info("Menta Application is launching on  device version "+vVersion+"....");
 		        //System.out.println(vBrowserName);
 		        try {

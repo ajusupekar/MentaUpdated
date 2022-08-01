@@ -181,20 +181,20 @@ public class Reusables {
 
 				// Reading properties file and setting up desired capabilities for iOS platform
 
-                String iOSDeviceName = Constants.CONFIG.getProperty("BS_iOSDevice");
-                String iOSDeviceVersion = Constants.CONFIG.getProperty("BS_iOSPlatformVersion");
+//              String iOSDeviceName = Constants.CONFIG.getProperty("BS_iOSDevice");
+//              String iOSDeviceVersion = Constants.CONFIG.getProperty("BS_iOSPlatformVersion");
     			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformName")+" Device "+bDevice+" Version "+bVersion+" ............");
                 Constants.IOSDC = new DesiredCapabilities();
-                Constants.IOSDC.setCapability("device", iOSDeviceName);
-                Constants.IOSDC.setCapability("os_version", iOSDeviceVersion);
-                Constants.IOSDC.setCapability("project", "CD iOS");
+                Constants.AndroidDC.setCapability("device", bDevice);							 
+    			Constants.AndroidDC.setCapability("os_version",bVersion);
+                Constants.IOSDC.setCapability("project", "Menta iOS");
                 //Constants.IOSDC.setCapability("build", "iOS - "+day);
                 //Constants.IOSDC.setCapability("name", date + " - "+ Constants.TagNames);
                 // Constants.IOSDC.setCapability("browserstack.debug", "true");
                 Constants.IOSDC.setCapability("build", "iOS _"+DayMonth);
                 //Constants.androidDc.setCapability("name", TimeStamp + " - "+ Constants.TagNames);
                 // Constants.IOSDC.setCapability("build", DateTime);
-                Constants.IOSDC.setCapability("name", "CD iOS");
+                Constants.IOSDC.setCapability("name", "Menta iOS");
                
                 LogCapture.info("Installing iOS Menta Application............");
                 Constants.IOSDC.setCapability(MobileCapabilityType.APP,"bs://" + Constants.CONFIG.getProperty("BS_IOSMentaAppVersion"));
