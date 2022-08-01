@@ -181,45 +181,47 @@ public class Reusables {
 			// Checking platform for setting up desired capabilities
 			if (Constants.CONFIG.getProperty("platformName").equalsIgnoreCase("iOS")) {
 
-				// Reading properties file and setting up desired capabilities for iOS platform
+			// Reading properties file and setting up desired capabilities for iOS platform
+			//String AndroidDeviceName = Constants.CONFIG.getProperty("BS_AndroidDevice");
+			// AndroidDeviceVersion = Constants.CONFIG.getProperty("BS_AndroidPlatformVersion");
 
-//              String iOSDeviceName = Constants.CONFIG.getProperty("BS_iOSDevice");
-//              String iOSDeviceVersion = Constants.CONFIG.getProperty("BS_iOSPlatformVersion");
-    			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformName")+" Device "+bDevice+" Version "+bVersion+" ............");
-                Constants.IOSDC = new DesiredCapabilities();
-                Constants.AndroidDC.setCapability("device", bDevice);							 
-    			Constants.AndroidDC.setCapability("os_version",bVersion);
-                Constants.IOSDC.setCapability("project", "Menta iOS");
-                //Constants.IOSDC.setCapability("build", "iOS - "+day);
-                //Constants.IOSDC.setCapability("name", date + " - "+ Constants.TagNames);
-                // Constants.IOSDC.setCapability("browserstack.debug", "true");
-                Constants.IOSDC.setCapability("build", "iOS _"+DayMonth);
-                //Constants.androidDc.setCapability("name", TimeStamp + " - "+ Constants.TagNames);
-                // Constants.IOSDC.setCapability("build", DateTime);
-                Constants.IOSDC.setCapability("name", "Menta iOS");
-               
-                LogCapture.info("Installing iOS Menta Application............");
-                Constants.IOSDC.setCapability(MobileCapabilityType.APP,"bs://" + Constants.CONFIG.getProperty("BS_IOSMentaAppVersion"));
+			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformName")+" Device "+bDevice+" Version "+bVersion+" ............");
+			Constants.AndroidDC = new DesiredCapabilities();
+			Constants.AndroidDC.setCapability("device", bDevice);							 
+			Constants.AndroidDC.setCapability("os_version",bVersion);
+			Constants.AndroidDC.setCapability("project", "Menta IOS");
+			//Constants.androidDc.setCapability("build", "Android - "+day);
+			//Constants.androidDc.setCapability("name", date + " - "+ Constants.TagNames);
+			// Constants.IOSDC.setCapability("browserstack.debug", "true");
+			//Constants.androidDc.setCapability("build", "Android - "+DayMonth);
+			//Constants.androidDc.setCapability("name", TimeStamp + " - "+ Constants.TagNames);
+			Constants.AndroidDC.setCapability("build", DateTime);
+			Constants.AndroidDC.setCapability("name", "Menta Android");
+			//Constants.AndroidDC.setCapability("platformName", Constants.CONFIG.getProperty("platformName"));
+			Constants.AndroidDC.setCapability("unicodeKeyboard", true);
+			Constants.AndroidDC.setCapability("noReset", true);
 
-               
-                Constants.driver = new IOSDriver<MobileElement>(
-                        new URL("https://" + username + ":" + accesskey + "@hub-cloud.browserstack.com/wd/hub"),
-                        Constants.IOSDC);
-                // Webdriver wait implementation
-                Constants.waitInSeconds = Integer.parseInt(Constants.CONFIG.getProperty("WaitInSecondsForIOS"));
-                Constants.wait = new WebDriverWait(Constants.driver, Constants.waitInSeconds);
-                takeSnapShot();
-
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            LogCapture.info(
-                    "Installation or launching app process failed...Please check provided configuration details.........!!!!");
-            return Constants.KEYWORD_FAIL;
-        }
-        return Constants.KEYWORD_PASS;
-
-    }
+			// Browserstack app path
+			LogCapture.info("Installing IOS Menta Application............");
+			
+			Constants.AndroidDC.setCapability(MobileCapabilityType.APP,"bs://" + Constants.CONFIG.getProperty("BS_IOSMentaAppVersion"));
+			
+			Constants.driver = new AndroidDriver<MobileElement>(
+					new URL("https://" + username + ":" + accesskey + "@hub-cloud.browserstack.com/wd/hub"),
+					Constants.AndroidDC);
+			// Webdriver wait implementation
+			Constants.waitInSeconds = Integer.parseInt(Constants.CONFIG.getProperty("waitInSeconds"));
+			Constants.wait = new WebDriverWait(Constants.driver, Constants.waitInSeconds);
+			takeSnapShot();
+		}
+	} catch (Exception e) {
+		System.out.println(e.getMessage());
+		LogCapture.info(
+				"Installation or launching app process failed...Please check provided configuration details.........!!!!");
+		return Constants.KEYWORD_FAIL;
+	}
+	return Constants.KEYWORD_PASS;
+}
 	
 	public String launchAppUsingDeviceId(String device) throws Exception {
 		try {
