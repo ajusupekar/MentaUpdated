@@ -46,7 +46,7 @@ public class Reusables {
 			// Writing logs in log file
 			LogCapture.info("Application setup started............");
 			// Checking platform for setting up desired capabilities
-			if (Constants.CONFIG.getProperty("platformName").equalsIgnoreCase("Android")) {
+			if (Constants.CONFIG.getProperty("platformNameAndroid").equalsIgnoreCase("Android")) {
 				// Reading properties file and setting up desired capabilities
 				// for android platform
 				Constants.AndroidDC = new DesiredCapabilities();				
@@ -69,12 +69,12 @@ public class Reusables {
 				takeSnapShot();
 			}
 
-			else if (Constants.CONFIG.getProperty("platformName").equalsIgnoreCase("iOS")) {
+			else if (Constants.CONFIG.getProperty("platformNameIOS").equalsIgnoreCase("iOS")) {
 				// Reading properties file and setting up desired capabilities for iOS platform
 				Constants.IOSDC = new DesiredCapabilities();
 				Constants.IOSDC.setCapability(MobileCapabilityType.DEVICE_NAME,Constants.CONFIG.getProperty("IOSDeviceName"));
 				Constants.IOSDC.setCapability(MobileCapabilityType.UDID, Constants.CONFIG.getProperty("IOSUdId"));
-				Constants.IOSDC.setCapability(MobileCapabilityType.PLATFORM_NAME,Constants.CONFIG.getProperty("platformName"));
+				Constants.IOSDC.setCapability(MobileCapabilityType.PLATFORM_NAME,Constants.CONFIG.getProperty("platformNameIOS"));
 				Constants.IOSDC.setCapability(MobileCapabilityType.NO_RESET, false);
 				Constants.IOSDC.setCapability(MobileCapabilityType.FULL_RESET, false);
 				
@@ -120,13 +120,13 @@ public class Reusables {
 			SimpleDateFormat formatTimeStamp = new SimpleDateFormat("hh:mm:ss");
 			String TimeStamp = formatTimeStamp.format(new Date());
 			// Checking platform for setting up desired capabilities
-			if (Constants.CONFIG.getProperty("platformName").equalsIgnoreCase("Android")) {
+			if (Constants.CONFIG.getProperty("platformNameAndroid").equalsIgnoreCase("Android")) {
 
 			// Reading properties file and setting up desired capabilities for iOS platform
 			//String AndroidDeviceName = Constants.CONFIG.getProperty("BS_AndroidDevice");
 			// AndroidDeviceVersion = Constants.CONFIG.getProperty("BS_AndroidPlatformVersion");
 
-			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformName")+" Device "+bDevice+" Version "+bVersion+" ............");
+			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformNameAndroid")+" Device "+bDevice+" Version "+bVersion+" ............");
 			Constants.AndroidDC = new DesiredCapabilities();
 			Constants.AndroidDC.setCapability("device", bDevice);							 
 			Constants.AndroidDC.setCapability("os_version",bVersion);
@@ -179,13 +179,13 @@ public class Reusables {
 			SimpleDateFormat formatTimeStamp = new SimpleDateFormat("hh:mm:ss");
 			String TimeStamp = formatTimeStamp.format(new Date());
 			// Checking platform for setting up desired capabilities
-			if (Constants.CONFIG.getProperty("platformName").equalsIgnoreCase("iOS")) {
+			if (Constants.CONFIG.getProperty("platformNameIOS").equalsIgnoreCase("iOS")) {
 
 			// Reading properties file and setting up desired capabilities for iOS platform
 			//String AndroidDeviceName = Constants.CONFIG.getProperty("BS_AndroidDevice");
 			// AndroidDeviceVersion = Constants.CONFIG.getProperty("BS_AndroidPlatformVersion");
 
-			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformName")+" Device "+bDevice+" Version "+bVersion+" ............");
+			LogCapture.info("Opening Menta  Application on "+Constants.CONFIG.getProperty("platformNameIOS")+" Device "+bDevice+" Version "+bVersion+" ............");
 			Constants.IOSDC = new DesiredCapabilities();
 			Constants.IOSDC.setCapability("device", bDevice);							 
 			Constants.IOSDC.setCapability("os_version",bVersion);
@@ -228,7 +228,7 @@ public class Reusables {
 		// Writing logs in log file
 		LogCapture.info("Application setup started............");
 		// Checking platform for setting up desired capabilities
-		if (Constants.CONFIG.getProperty("platformName").equalsIgnoreCase("Android")) {
+		if (Constants.CONFIG.getProperty("platformNameAndroid").equalsIgnoreCase("Android")) {
 			// Reading properties file and setting up desired capabilities
 			// for android platform
 			Constants.AndroidDC = new DesiredCapabilities();				
@@ -267,7 +267,7 @@ public class Reusables {
 			// Writing logs in log file
 			LogCapture.info("Application setup started............");
 			// Checking platform for setting up desired capabilities
-			if (Constants.CONFIG.getProperty("platformName").equalsIgnoreCase("Android")) 
+			if (Constants.CONFIG.getProperty("platformNameAndroid").equalsIgnoreCase("Android")) 
 			{
 				// Reading properties file and setting up desired capabilities
 				// for android platform
@@ -309,7 +309,7 @@ public class Reusables {
 			Constants.IOSDC = new DesiredCapabilities();
 			Constants.IOSDC.setCapability(MobileCapabilityType.DEVICE_NAME,Constants.CONFIG.getProperty("IOSDeviceName"));
 			Constants.IOSDC.setCapability(MobileCapabilityType.UDID, Constants.CONFIG.getProperty("IOSUdId"));
-			Constants.IOSDC.setCapability(MobileCapabilityType.PLATFORM_NAME,Constants.CONFIG.getProperty("platformName"));
+			Constants.IOSDC.setCapability(MobileCapabilityType.PLATFORM_NAME,Constants.CONFIG.getProperty("platformNameIOS"));
 			Constants.IOSDC.setCapability(MobileCapabilityType.NO_RESET, false);
 			//Constants.IOSDC.setCapability(MobileCapabilityType.FULL_RESET, false);
 			//Constants.IOSDC.setCapability(MobileCapabilityType.FULL_RESET,true);
